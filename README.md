@@ -1,6 +1,3 @@
-# openvpnconnect
-
-```
 # OpenVPN Connect
 
 Setup vpn with openvpn
@@ -20,4 +17,3 @@ Your openvpn password
 The openvpn config file path. defaults to './config.ovpn' 
 
 Theres an additional 10seconds sleep time when this action finishes.
-```
