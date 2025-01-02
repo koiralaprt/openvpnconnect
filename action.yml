@@ -1,0 +1,27 @@
+name: 'VPNConnect'
+description: 'Connects to VPN using openvpn'
+author: 'Prayatna Koirala'
+inputs:
+  VPN_USER:
+    description: 'Your openvpn username'
+    required: true
+    default: ''
+  VPN_PASS:
+    description: 'Your openvpn password'
+    required: true
+    default: ''
+  VPN_CONFIG_FILE_PATH:
+    description: 'Your openvpn configuration file path'
+    required: true
+    default: './config.ovpn'
+runs:
+  using: 'composite'
+  steps:
+    - run: |
+        sudo apt-get install openvpn -y
+      shell: bash
+    - run: |
+        echo -e "${{ inputs.VPN_USER }}\n${{ inputs.VPN_PASS }}" > ~/.vpncreds
+        sudo openvpn --config "${{inputs.VPN_CONFIG_FILE_PATH}}" --auth-user-pass ~/.vpncreds --daemon
+        sleep 10s
+      shell: bash
